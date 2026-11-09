@@ -1,1 +1,639 @@
-PLACEHOLDER_WILL_REPLACE
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex"/>
+<title>Inminente — Sol de tu día</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#e8e0d4;
+  --muted:#9a9186;
+  --line:rgba(232,224,212,.14);
+  --ember:#e07830;
+  --ember-dim:rgba(224,120,48,.18);
+  --void:#07090f;
+  --panel:#10141d;
+  --panel2:#161b27;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 480px at 12% -10%,rgba(224,120,48,.22),transparent 55%),
+    radial-gradient(700px 420px at 100% 0%,rgba(70,110,180,.12),transparent 50%),
+    linear-gradient(180deg,#0b0e16,var(--void) 40%,#05070c);
+}
+.wrap{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:1.6rem 0 3.5rem}
+.eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:.7rem;color:var(--muted);margin:0 0 .4rem}
+.brand{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(2rem,5vw,3rem);margin:0;letter-spacing:-.02em}
+.lede{max-width:34rem;color:var(--muted);line-height:1.5;margin:.65rem 0 1.4rem;font-size:1.02rem}
+.panel{
+  background:linear-gradient(180deg,rgba(22,27,39,.92),rgba(16,20,29,.88));
+  border:1px solid var(--line);
+  padding:1.05rem 1.1rem 1.15rem;
+  backdrop-filter:blur(8px);
+}
+.row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:end}
+label{display:grid;gap:.35rem;font-size:.74rem;color:var(--muted);letter-spacing:.04em}
+input{
+  font:inherit;color:var(--ink);
+  border:1px solid var(--line);
+  padding:.65rem .75rem;min-width:11rem;
+  background:rgba(0,0,0,.28);
+}
+input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.85)}
+.cta,.ghost{
+  font:inherit;font-weight:600;border:0;cursor:pointer;
+  padding:.7rem 1.05rem;
+}
+.cta{background:var(--ember);color:#140c06}
+.cta:disabled{opacity:.5;cursor:wait}
+.ghost{
+  background:transparent;color:var(--ink);
+  border:1px solid var(--line);
+}
+.ghost:disabled{opacity:.45;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.9rem}
+.status{margin:.85rem 0 0;color:var(--muted);min-height:1.2em;font-size:.9rem}
+.secondary{
+  margin-top:1rem;font-size:.82rem;color:var(--muted);
+}
+.secondary button{
+  font:inherit;color:var(--ember);background:none;border:0;
+  padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;
+}
+.artifact{margin-top:1.35rem;display:none}
+.artifact.show{display:block;animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.poster-shell{
+  display:grid;justify-items:center;gap:1rem;
+}
+.poster{
+  width:min(100%,420px);
+  aspect-ratio:4/5;
+  background:#05070c;
+  color:#f3ebe1;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.55),
+    0 0 0 1px rgba(224,120,48,.12);
+}
+.poster-inner{
+  position:absolute;inset:0;
+  padding:6.5% 6.2% 5.5%;
+  display:flex;flex-direction:column;
+}
+.poster-glow{
+  position:absolute;inset:auto auto -10% -20%;
+  width:70%;height:55%;
+  background:radial-gradient(circle,rgba(255,160,70,.28),transparent 68%);
+  animation:pulse 5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
+.p-kicker{
+  position:relative;
+  font-size:clamp(.58rem,.9vw,.68rem);
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(243,235,225,.62);
+}
+.p-title{
+  position:relative;
+  font-family:Fraunces,Georgia,serif;
+  font-weight:700;
+  font-size:clamp(1.15rem,3.8vw,1.55rem);
+  line-height:1.12;
+  margin:.45rem 0 .2rem;
+  max-width:16ch;
+}
+.p-sub{
+  position:relative;
+  color:rgba(243,235,225,.68);
+  font-size:clamp(.72rem,1.8vw,.82rem);
+  line-height:1.35;
+  margin:0 0 .85rem;
+}
+.p-rule{
+  position:relative;
+  height:1px;border:0;margin:0 0 .85rem;
+  background:linear-gradient(90deg,rgba(224,120,48,.7),rgba(255,255,255,.08) 70%,transparent);
+}
+.grid{
+  position:relative;
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr 1fr;
+  gap:.45rem;
+  min-height:0;
+}
+.tile{
+  margin:0;min-height:0;background:#000;
+  border:1px solid rgba(255,255,255,.07);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.tile img{
+  display:block;width:100%;flex:1;min-height:0;
+  object-fit:cover;background:#0a0a0a;
+  opacity:0;transition:opacity .4s ease;
+}
+.tile img.ready{opacity:1}
+.tile.fail{outline:1px solid rgba(255,120,80,.4)}
+.tile figcaption{
+  padding:.28rem .35rem .34rem;
+  font-size:clamp(.55rem,1.4vw,.64rem);
+  color:rgba(243,235,225,.7);
+  line-height:1.25;
+  border-top:1px solid rgba(255,255,255,.06);
+  background:rgba(0,0,0,.55);
+}
+.tile figcaption strong{color:rgba(243,235,225,.92);font-weight:600}
+.p-foot{
+  position:relative;
+  margin-top:.7rem;
+  display:flex;justify-content:space-between;gap:.6rem;align-items:end;
+  font-size:clamp(.52rem,1.3vw,.62rem);
+  letter-spacing:.04em;
+  color:rgba(243,235,225,.5);
+}
+.p-foot b{color:rgba(243,235,225,.78);font-weight:600}
+.duo{
+  position:relative;
+  flex:1;min-height:0;
+  display:grid;grid-template-columns:1fr 1fr;gap:.5rem;
+}
+.portrait{
+  margin:0;min-height:0;background:#000;
+  border:1px solid rgba(255,255,255,.07);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.portrait img{
+  display:block;width:100%;flex:1;min-height:0;
+  object-fit:cover;opacity:0;transition:opacity .4s;
+}
+.portrait img.ready{opacity:1}
+.portrait.fail{outline:1px solid rgba(255,120,80,.4)}
+.portrait figcaption{
+  padding:.35rem .4rem;
+  font-size:.62rem;color:rgba(243,235,225,.7);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.note{
+  margin-top:.8rem;padding:.7rem .8rem;
+  border-left:3px solid var(--ember);
+  background:var(--ember-dim);
+  font-size:.88rem;color:var(--ink);
+  width:min(100%,420px);
+}
+.credit{margin-top:.35rem;font-size:.74rem;color:var(--muted);text-align:center;width:min(100%,420px)}
+footer{margin-top:2rem;color:var(--muted);font-size:.76rem}
+@media(max-width:520px){
+  .poster{width:100%}
+  input{min-width:0;width:100%}
+  .row label{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Preview · no es producción</p>
+  <h1 class="brand">Inminente</h1>
+  <p class="lede">El Sol del día que te importa, en seis longitudes de onda. Un póster para guardar, compartir o imprimir.</p>
+
+  <section class="panel">
+    <form class="row" id="form">
+      <label>Fecha
+        <input id="date" type="date" required min="1996-01-16" max="2026-12-31" value="2005-03-15"/>
+      </label>
+      <label id="lf">Para quién / qué día
+        <input id="label" type="text" maxlength="64" value="el día que naciste"/>
+      </label>
+      <button class="cta" id="go" type="submit">Hacer póster</button>
+    </form>
+    <div class="actions" id="shareActions" hidden>
+      <button class="cta" id="download" type="button">Descargar PNG</button>
+      <button class="ghost" id="share" type="button" hidden>Compartir</button>
+    </div>
+    <p class="status" id="status" aria-live="polite"></p>
+    <p class="secondary" id="duoToggleWrap">
+      ¿Quieres Sol + Tierra ese día?
+      <button type="button" id="duoToggle">Probar doble retrato</button>
+    </p>
+  </section>
+
+  <section class="artifact" id="artifact">
+    <div class="poster-shell">
+      <article class="poster" id="poster">
+        <div class="poster-glow" aria-hidden="true"></div>
+        <div class="poster-inner">
+          <div class="p-kicker" id="kicker">Inminente</div>
+          <h2 class="p-title" id="title">—</h2>
+          <p class="p-sub" id="subtitle">—</p>
+          <hr class="p-rule"/>
+          <div id="stage"></div>
+          <div class="p-foot">
+            <span id="footLeft"><b>space.inminente.co</b></span>
+            <span id="footRight">ESA/NASA · archivo público</span>
+          </div>
+        </div>
+      </article>
+      <div class="note" id="note" hidden></div>
+      <p class="credit" id="credit"></p>
+    </div>
+  </section>
+
+  <footer>Datos: ESA/NASA SOHO, NASA SDO (Helioviewer), NASA EPIC/DSCOVR. Preview para space.inminente.co</footer>
+</div>
+
+<script>
+const SOHO_START="1996-01-16", SDO_START="2010-06-02", EPIC_START="2015-06-13";
+const SOHO=[
+  {id:7,label:"Fotosfera",detail:"SOHO MDI continuum"},
+  {id:3,label:"Cromósfera",detail:"SOHO EIT 304 Å"},
+  {id:0,label:"Corona ~1M°C",detail:"SOHO EIT 171 Å"},
+  {id:1,label:"Corona ~1.5M°C",detail:"SOHO EIT 195 Å"},
+  {id:2,label:"Corona ~2M°C",detail:"SOHO EIT 284 Å"},
+  {id:4,label:"Corona externa",detail:"SOHO LASCO C2"}
+];
+const SDO=[
+  {id:18,label:"Fotosfera",detail:"SDO HMI continuum"},
+  {id:13,label:"Cromósfera",detail:"SDO AIA 304 Å"},
+  {id:10,label:"Corona ~1M°C",detail:"SDO AIA 171 Å"},
+  {id:11,label:"Corona ~1.5M°C",detail:"SDO AIA 193 Å"},
+  {id:12,label:"Corona ~2M°C",detail:"SDO AIA 211 Å"},
+  {id:4,label:"Corona externa",detail:"SOHO LASCO C2"}
+];
+
+let mode=1, runId=0, lastPoster=null;
+const $=id=>document.getElementById(id);
+const form=$("form"), dateEl=$("date"), labelEl=$("label");
+const statusEl=$("status"), artifact=$("artifact"), stage=$("stage");
+const title=$("title"), subtitle=$("subtitle"), kicker=$("kicker");
+const note=$("note"), credit=$("credit"), go=$("go");
+const shareActions=$("shareActions"), downloadBtn=$("download"), shareBtn=$("share");
+const duoToggle=$("duoToggle"), lf=$("lf"), footRight=$("footRight");
+
+duoToggle.onclick=()=>{
+  mode = mode===1 ? 2 : 1;
+  duoToggle.textContent = mode===1 ? "Probar doble retrato" : "Volver al póster de soles";
+  lf.style.display = mode===1 ? "grid" : "none";
+  artifact.classList.remove("show");
+  shareActions.hidden=true;
+  statusEl.textContent = mode===2
+    ? "Modo doble retrato. Elige una fecha (Tierra desde jun 2015)."
+    : "";
+};
+
+function fmt(iso){
+  const [y,m,d]=iso.split("-").map(Number);
+  return new Intl.DateTimeFormat("es-CO",{
+    day:"numeric", month:"long", year:"numeric", timeZone:"UTC"
+  }).format(new Date(Date.UTC(y,m-1,d)));
+}
+function chans(d){ return d>=SDO_START ? SDO : SOHO; }
+function obs(d){ return d>=SDO_START ? "NASA SDO + SOHO LASCO" : "ESA/NASA SOHO"; }
+
+function loadImg(img, url, timeoutMs=45000){
+  return new Promise(resolve=>{
+    let done=false;
+    const finish=(ok)=>{
+      if(done) return;
+      done=true;
+      clearTimeout(t);
+      img.onload=null; img.onerror=null;
+      if(ok) img.classList.add("ready");
+      resolve(ok);
+    };
+    const t=setTimeout(()=>finish(false), timeoutMs);
+    img.onload=()=>finish(true);
+    img.onerror=()=>finish(false);
+    img.crossOrigin="anonymous";
+    img.src=url;
+  });
+}
+
+async function mapPool(items, limit, fn){
+  const out=new Array(items.length);
+  let i=0;
+  async function worker(){
+    while(i<items.length){
+      const idx=i++;
+      out[idx]=await fn(items[idx], idx);
+    }
+  }
+  await Promise.all(Array.from({length:Math.min(limit, items.length)}, ()=>worker()));
+  return out;
+}
+
+form.onsubmit=async e=>{
+  e.preventDefault();
+  const date=dateEl.value;
+  if(!date) return;
+  if(date<SOHO_START){
+    statusEl.textContent="El archivo útil empieza el 16 ene 1996.";
+    return;
+  }
+  const myRun=++runId;
+  go.disabled=true;
+  shareActions.hidden=true;
+  lastPoster=null;
+  statusEl.textContent="Buscando frames…";
+  note.hidden=true;
+  artifact.classList.add("show");
+  try{
+    if(mode===1) await identity(date, myRun);
+    else await duo(date, myRun);
+    if(myRun!==runId) return;
+    credit.textContent = mode===1
+      ? "Crédito de datos: ESA/NASA SOHO y NASA SDO vía Helioviewer."
+      : "Crédito: ESA/NASA SOHO y NASA SDO vía Helioviewer; Tierra: NASA EPIC/DSCOVR.";
+    statusEl.textContent="Componiendo póster…";
+    lastPoster = await renderPosterPng();
+    shareActions.hidden=false;
+    shareBtn.hidden = !(navigator.canShare && lastPoster);
+    statusEl.textContent="Listo. Descárgalo o compártelo.";
+  }catch(err){
+    console.error(err);
+    if(myRun===runId) statusEl.textContent="Falló la carga. Reintenta.";
+  }finally{
+    if(myRun===runId) go.disabled=false;
+  }
+};
+
+async function identity(date, myRun){
+  const label=(labelEl.value||"ese día").trim();
+  kicker.textContent="Inminente · Sol de tu día";
+  title.textContent="El Sol de "+label;
+  subtitle.textContent=fmt(date)+" · "+obs(date);
+  footRight.textContent=obs(date);
+  const grid=document.createElement("div");
+  grid.className="grid";
+  stage.replaceChildren(grid);
+  const list=chans(date);
+  let done=0, ok=0;
+  await mapPool(list, 2, async (ch)=>{
+    if(myRun!==runId) return;
+    const fig=document.createElement("figure");
+    fig.className="tile";
+    const img=document.createElement("img");
+    img.alt=ch.label;
+    img.decoding="async";
+    const cap=document.createElement("figcaption");
+    cap.innerHTML="<strong>"+ch.label+"</strong><br>"+ch.detail;
+    fig.append(img,cap);
+    grid.append(fig);
+    const url="/api/sun?date="+encodeURIComponent(date)+"&sourceId="+ch.id;
+    const good=await loadImg(img, url);
+    if(!good) fig.classList.add("fail");
+    done++; if(good) ok++;
+    if(myRun===runId) statusEl.textContent="Cargando "+done+"/"+list.length+"…";
+  });
+  if(myRun===runId && ok===0) throw new Error("no_frames");
+}
+
+async function duo(date, myRun){
+  kicker.textContent="Inminente · Doble retrato";
+  title.textContent="El sistema ese día";
+  subtitle.textContent=fmt(date);
+  footRight.textContent="Sol + Tierra";
+  const wrap=document.createElement("div");
+  wrap.className="duo";
+  stage.replaceChildren(wrap);
+  const sunCh=date>=SDO_START ? {id:13,detail:"SDO AIA 304 Å"} : {id:3,detail:"SOHO EIT 304 Å"};
+  const mk=(cls,alt)=>{
+    const fig=document.createElement("figure");
+    fig.className=cls;
+    const img=document.createElement("img");
+    img.alt=alt;
+    img.decoding="async";
+    const cap=document.createElement("figcaption");
+    fig.append(img,cap);
+    wrap.append(fig);
+    return {fig,img,cap};
+  };
+  const sun=mk("portrait","Sol");
+  sun.cap.innerHTML="<strong>Sol</strong><br>"+sunCh.detail;
+  const earth=mk("portrait","Tierra");
+  earth.cap.innerHTML="<strong>Tierra</strong><br>NASA EPIC / DSCOVR";
+
+  statusEl.textContent="Cargando Sol…";
+  const sunOk=await loadImg(sun.img, "/api/sun?date="+encodeURIComponent(date)+"&sourceId="+sunCh.id);
+  if(!sunOk) sun.fig.classList.add("fail");
+  if(myRun!==runId) return;
+
+  if(date<EPIC_START){
+    earth.cap.innerHTML="<strong>Tierra</strong><br>Sin EPIC antes de "+EPIC_START;
+    note.hidden=false;
+    note.textContent="Antes de junio 2015 no hay retrato diario de la Tierra desde L1. El Sol sí, desde 1996.";
+    return;
+  }
+
+  statusEl.textContent="Cargando Tierra…";
+  const meta=await fetch("/api/earth?date="+encodeURIComponent(date)).then(r=>{
+    if(!r.ok) throw new Error("earth_meta_"+r.status);
+    return r.json();
+  });
+  if(myRun!==runId) return;
+  if(!meta.available){
+    earth.cap.innerHTML="<strong>Tierra</strong><br>"+(meta.reason||"Sin frame");
+    note.hidden=false;
+    note.textContent=meta.reason||"Sin frame EPIC.";
+    return;
+  }
+  earth.cap.innerHTML="<strong>Tierra</strong><br>EPIC · "+(meta.observedAt||date);
+  const earthOk=await loadImg(earth.img, meta.imageUrl, 60000);
+  if(!earthOk) earth.fig.classList.add("fail");
+  note.hidden=true;
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  const rr=Math.min(r,w/2,h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+rr,y);
+  ctx.arcTo(x+w,y,x+w,y+h,rr);
+  ctx.arcTo(x+w,y+h,x,y+h,rr);
+  ctx.arcTo(x,y+h,x,y,rr);
+  ctx.arcTo(x,y,x+w,y,rr);
+  ctx.closePath();
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
+  const words=String(text).split(/\s+/);
+  const lines=[];
+  let line="";
+  for(const word of words){
+    const test=line?line+" "+word:word;
+    if(ctx.measureText(test).width>maxWidth && line){
+      lines.push(line);
+      line=word;
+    }else line=test;
+  }
+  if(line) lines.push(line);
+  const use=lines.slice(0,maxLines);
+  if(lines.length>maxLines){
+    let last=use[use.length-1];
+    while(ctx.measureText(last+"…").width>maxWidth && last.length>1) last=last.slice(0,-1);
+    use[use.length-1]=last+"…";
+  }
+  use.forEach((ln,i)=>ctx.fillText(ln,x,y+i*lineHeight));
+  return use.length*lineHeight;
+}
+
+async function renderPosterPng(){
+  const W=1600, H=2000; // 4:5, buen tamaño para IG / print letter-ish
+  const canvas=document.createElement("canvas");
+  canvas.width=W; canvas.height=H;
+  const ctx=canvas.getContext("2d");
+
+  // fondo
+  const bg=ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,"#0c1018");
+  bg.addColorStop(.55,"#07090f");
+  bg.addColorStop(1,"#05070c");
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,W,H);
+
+  // glow
+  const glow=ctx.createRadialGradient(W*0.15,H*0.9,20,W*0.15,H*0.9,W*0.7);
+  glow.addColorStop(0,"rgba(255,150,60,0.28)");
+  glow.addColorStop(1,"rgba(255,150,60,0)");
+  ctx.fillStyle=glow;
+  ctx.fillRect(0,0,W,H);
+
+  const pad=W*0.075;
+  let y=pad*0.95;
+
+  ctx.fillStyle="rgba(243,235,225,0.62)";
+  ctx.font="500 28px 'IBM Plex Sans', system-ui, sans-serif";
+  ctx.letterSpacing="0.18em";
+  ctx.fillText(kicker.textContent.toUpperCase(), pad, y);
+  ctx.letterSpacing="0px";
+  y+=70;
+
+  ctx.fillStyle="#f3ebe1";
+  ctx.font="700 78px Fraunces, Georgia, serif";
+  y+=wrapText(ctx, title.textContent, pad, y, W-pad*2, 86, 3);
+  y+=28;
+
+  ctx.fillStyle="rgba(243,235,225,0.68)";
+  ctx.font="400 34px 'IBM Plex Sans', system-ui, sans-serif";
+  y+=wrapText(ctx, subtitle.textContent, pad, y, W-pad*2, 44, 2);
+  y+=36;
+
+  const ruleGrad=ctx.createLinearGradient(pad,0,W-pad,0);
+  ruleGrad.addColorStop(0,"rgba(224,120,48,0.85)");
+  ruleGrad.addColorStop(0.7,"rgba(255,255,255,0.12)");
+  ruleGrad.addColorStop(1,"rgba(255,255,255,0)");
+  ctx.fillStyle=ruleGrad;
+  ctx.fillRect(pad,y,W-pad*2,3);
+  y+=42;
+
+  const imgs=[...stage.querySelectorAll("img.ready")];
+  const caps=[...stage.querySelectorAll("figcaption")].map(c=>c.innerText.replace(/\n/g," · "));
+  const isDuo = stage.querySelector(".duo");
+  const cols=isDuo?2:2;
+  const rows=isDuo?1:3;
+  const gap=18;
+  const gridW=W-pad*2;
+  const footH=90;
+  const gridH=H-y-pad-footH;
+  const cellW=(gridW-gap*(cols-1))/cols;
+  const cellH=(gridH-gap*(rows-1))/rows;
+
+  for(let i=0;i<imgs.length;i++){
+    const c=i%cols, r=Math.floor(i/cols);
+    const x=pad+c*(cellW+gap);
+    const cy=y+r*(cellH+gap);
+    const capH=Math.min(78, cellH*0.18);
+    const imgH=cellH-capH;
+
+    ctx.fillStyle="#000";
+    roundRect(ctx,x,cy,cellW,cellH,10);
+    ctx.fill();
+
+    ctx.save();
+    roundRect(ctx,x,cy,cellW,imgH,10);
+    ctx.clip();
+    // draw image cover
+    const img=imgs[i];
+    const iw=img.naturalWidth||1, ih=img.naturalHeight||1;
+    const scale=Math.max(cellW/iw, imgH/ih);
+    const dw=iw*scale, dh=ih*scale;
+    ctx.drawImage(img, x+(cellW-dw)/2, cy+(imgH-dh)/2, dw, dh);
+    ctx.restore();
+
+    ctx.fillStyle="rgba(0,0,0,0.72)";
+    ctx.fillRect(x, cy+imgH, cellW, capH);
+    ctx.strokeStyle="rgba(255,255,255,0.08)";
+    ctx.strokeRect(x+0.5, cy+0.5, cellW-1, cellH-1);
+
+    ctx.fillStyle="rgba(243,235,225,0.86)";
+    ctx.font="600 22px 'IBM Plex Sans', system-ui, sans-serif";
+    const cap=caps[i]||"";
+    const [strong,...rest]=cap.split(" · ");
+    ctx.fillText(strong||cap, x+16, cy+imgH+30);
+    if(rest.length){
+      ctx.fillStyle="rgba(243,235,225,0.55)";
+      ctx.font="400 18px 'IBM Plex Sans', system-ui, sans-serif";
+      ctx.fillText(rest.join(" · "), x+16, cy+imgH+54);
+    }
+  }
+
+  const fy=H-pad*0.85;
+  ctx.fillStyle="rgba(243,235,225,0.78)";
+  ctx.font="600 24px 'IBM Plex Sans', system-ui, sans-serif";
+  ctx.fillText("space.inminente.co", pad, fy);
+  ctx.fillStyle="rgba(243,235,225,0.45)";
+  ctx.font="400 22px 'IBM Plex Sans', system-ui, sans-serif";
+  const right=footRight.textContent+"  ·  archivo público";
+  const rw=ctx.measureText(right).width;
+  ctx.fillText(right, W-pad-rw, fy);
+
+  const blob=await new Promise(res=>canvas.toBlob(res,"image/png"));
+  if(!blob) throw new Error("png_failed");
+  return new File([blob], posterFilename(), {type:"image/png"});
+}
+
+function posterFilename(){
+  const date=dateEl.value||"fecha";
+  const slug=(labelEl.value||"sol").toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40);
+  return "inminente-sol-"+date+(slug?"-"+slug:"")+".png";
+}
+
+downloadBtn.onclick=()=>{
+  if(!lastPoster) return;
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(lastPoster);
+  a.download=lastPoster.name;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+};
+
+shareBtn.onclick=async ()=>{
+  if(!lastPoster) return;
+  try{
+    if(navigator.canShare && navigator.canShare({files:[lastPoster]})){
+      await navigator.share({
+        files:[lastPoster],
+        title:title.textContent,
+        text:subtitle.textContent+" · Inminente"
+      });
+    }
+  }catch(err){
+    if(err && err.name!=="AbortError") console.error(err);
+  }
+};
+</script>
+</body>
+</html>
