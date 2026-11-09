@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex"/><title>Inminente — Sol de tu día</title><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet"/><style>
+:root{--ink:#1a1410;--muted:#5c534c;--paper:#f7f1e8;--paper2:#efe6d8;--line:rgba(26,20,16,.12);--ember:#c45a12;--deep:#8a3a0a;--void:#0b0e14}
+*{box-sizing:border-box}body{margin:0;font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--ink);background:radial-gradient(1000px 500px at 8% -8%,rgba(196,90,18,.18),transparent 55%),linear-gradient(180deg,var(--paper),var(--paper2))}
+.wrap{width:min(1100px,calc(100% - 2rem));margin:0 auto;padding:1.4rem 0 3rem}
+.brand{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,4vw,2.3rem);margin:0}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;color:var(--muted);margin:0 0 .35rem}
+.lede{max-width:38rem;color:var(--muted);line-height:1.45;margin:.5rem 0 1.2rem}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem}
+@media(max-width:720px){.modes{grid-template-columns:1fr}}
+.mode{border:1px solid var(--line);background:rgba(255,255,255,.55);padding:.9rem 1rem;text-align:left;cursor:pointer}
+.mode[aria-pressed="true"]{border-color:var(--ember);background:#fff;box-shadow:inset 0 0 0 1px rgba(196,90,18,.25)}
+.mode h2{font-family:Fraunces,Georgia,serif;font-size:1.1rem;margin:0 0 .3rem}
+.mode p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.35}
+.panel{border:1px solid var(--line);background:rgba(255,255,255,.62);padding:1rem}
+.row{display:flex;flex-wrap:wrap;gap:.7rem;align-items:end}
+label{display:grid;gap:.3rem;font-size:.78rem;color:var(--muted)}
+input{font:inherit;border:1px solid var(--line);padding:.6rem .7rem;min-width:10.5rem;background:#fff}
+.cta{font:inherit;font-weight:600;border:0;background:var(--ember);color:#fff;padding:.68rem 1rem;cursor:pointer}
+.cta:disabled{opacity:.55}
+.status{margin:.8rem 0 0;color:var(--muted);min-height:1.2em;font-size:.9rem}
+.artifact{margin-top:1.2rem;display:none}.artifact.show{display:block;animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--void);color:#f4ebe1;padding:1.1rem 1.1rem 1.3rem;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;inset:-20% auto auto -10%;width:240px;height:240px;background:radial-gradient(circle,rgba(255,179,92,.35),transparent 70%);animation:pulse 4.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
+.kicker,.title,.sub,.grid,.duo{position:relative}
+.kicker{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,235,225,.65)}
+.title{font-family:Fraunces,Georgia,serif;font-size:clamp(1.3rem,3.4vw,1.9rem);margin:.3rem 0 .2rem;max-width:20ch}
+.sub{color:rgba(244,235,225,.72);margin:0 0 .9rem;max-width:42ch;line-height:1.4}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile,.portrait{margin:0;background:#000;border:1px solid rgba(255,255,255,.08)}
+.tile img,.portrait img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#111;opacity:0;transition:opacity .4s}
+.tile img.ready,.portrait img.ready{opacity:1}
+.tile figcaption,.portrait figcaption{padding:.4rem .5rem .55rem;font-size:.72rem;color:rgba(244,235,225,.7);line-height:1.3}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+@media(max-width:800px){.duo{grid-template-columns:1fr}}
+.credit{margin-top:.9rem;font-size:.74rem;color:var(--muted)}
+.note{margin-top:.7rem;padding:.7rem .8rem;border-left:3px solid var(--ember);background:rgba(196,90,18,.08);font-size:.88rem}
+footer{margin-top:1.8rem;color:var(--muted);font-size:.78rem}
+</style></head><body><div class="wrap"><p class="eyebrow">Preview · no es producción</p><h1 class="brand">Inminente</h1><p class="lede">Dos experimentos con el archivo público del Sol. Elige uno, pon una fecha que te importe.</p><div class="modes"><button class="mode" id="mode1" type="button" aria-pressed="true"><h2>1 · Objeto de identidad</h2><p>El Sol de ese día, en varias longitudes de onda, como el panel del observatorio.</p></button><button class="mode" id="mode2" type="button" aria-pressed="false"><h2>2 · Doble retrato</h2><p>Sol + Tierra ese día. EPIC existe desde junio 2015.</p></button></div><section class="panel"><form class="row" id="form"><label>Fecha<input id="date" type="date" required min="1996-01-16" max="2026-11-08" value="2005-03-15"/></label><label id="lf">Para quién / qué día<input id="label" type="text" maxlength="80" value="el día que naciste"/></label><button class="cta" id="go" type="submit">Ver</button></form><p class="status" id="status" aria-live="polite"></p></section><section class="artifact" id="artifact"><article class="card"><div class="kicker" id="kicker">Inminente · Sol de tu día</div><h2 class="title" id="title">—</h2><p class="sub" id="subtitle">—</p><div id="stage"></div></article><div class="note" id="note" hidden></div><p class="credit" id="credit"></p></section><footer>Datos: ESA/NASA SOHO, NASA SDO (Helioviewer), NASA EPIC/DSCOVR. Preview para space.inminente.co</footer></div><script>
+const SOHO_START="1996-01-16",SDO_START="2010-06-02",EPIC_START="2015-06-13";
+const SOHO=[{id:7,label:"Fotosfera",detail:"SOHO MDI continuum"},{id:3,label:"Cromósfera",detail:"SOHO EIT 304"},{id:0,label:"Corona ~1M°C",detail:"SOHO EIT 171"},{id:1,label:"Corona ~1.5M°C",detail:"SOHO EIT 195"},{id:2,label:"Corona ~2M°C",detail:"SOHO EIT 284"},{id:4,label:"Corona externa",detail:"SOHO LASCO C2"}];
+const SDO=[{id:18,label:"Fotosfera",detail:"SDO HMI continuum"},{id:13,label:"Cromósfera",detail:"SDO AIA 304"},{id:10,label:"Corona ~1M°C",detail:"SDO AIA 171"},{id:11,label:"Corona ~1.5M°C",detail:"SDO AIA 193"},{id:12,label:"Corona ~2M°C",detail:"SDO AIA 211"},{id:4,label:"Corona externa",detail:"SOHO LASCO C2"}];
+let mode=1;
+const $=id=>document.getElementById(id);
+const mode1=$("mode1"),mode2=$("mode2"),form=$("form"),dateEl=$("date"),labelEl=$("label"),statusEl=$("status"),artifact=$("artifact"),stage=$("stage"),title=$("title"),subtitle=$("subtitle"),kicker=$("kicker"),note=$("note"),credit=$("credit"),go=$("go");
+mode1.onclick=()=>setMode(1);mode2.onclick=()=>setMode(2);
+function setMode(m){mode=m;mode1.setAttribute("aria-pressed",m===1?"true":"false");mode2.setAttribute("aria-pressed",m===2?"true":"false");labelEl.parentElement.style.display=m===1?"grid":"none";artifact.classList.remove("show");statusEl.textContent=""}
+function fmt(iso){const[y,m,d]=iso.split("-").map(Number);return new Intl.DateTimeFormat("es-CO",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(y,m-1,d)))}
+function chans(d){return d>=SDO_START?SDO:SOHO}
+function obs(d){return d>=SDO_START?"NASA SDO + SOHO LASCO":"ESA/NASA SOHO"}
+form.onsubmit=async e=>{e.preventDefault();const date=dateEl.value;if(!date)return;if(date<SOHO_START){statusEl.textContent="El archivo útil empieza el 16 ene 1996.";return}go.disabled=true;statusEl.textContent="Buscando frames…";artifact.classList.remove("show");note.hidden=true;try{if(mode===1)await identity(date);else await duo(date);credit.textContent="Crédito: ESA/NASA SOHO y NASA SDO vía Helioviewer"+(mode===2?"; Tierra: NASA EPIC/DSCOVR.":".");artifact.classList.add("show");statusEl.textContent="Listo."}catch(err){console.error(err);statusEl.textContent="Falló la carga. Reintenta."}finally{go.disabled=false}};
+async function identity(date){const label=(labelEl.value||"ese día").trim();kicker.textContent="Inminente · Objeto de identidad";title.textContent="El Sol de "+label;subtitle.textContent=fmt(date)+" · "+obs(date)+". Disco real, capas de temperatura.";const grid=document.createElement("div");grid.className="grid";stage.replaceChildren(grid);await Promise.all(chans(date).map(async ch=>{const fig=document.createElement("figure");fig.className="tile";const img=document.createElement("img");img.alt=ch.label;img.loading="lazy";const cap=document.createElement("figcaption");cap.innerHTML="<strong>"+ch.label+"</strong><br>"+ch.detail;fig.append(img,cap);grid.append(fig);img.src="/api/sun?date="+encodeURIComponent(date)+"&sourceId="+ch.id;await img.decode().catch(()=>{});img.classList.add("ready")}))}
+async function duo(date){kicker.textContent="Inminente · Doble retrato";title.textContent="El sistema ese día";subtitle.textContent=fmt(date)+". Misma fecha, dos miradas.";const duo=document.createElement("div");duo.className="duo";stage.replaceChildren(duo);const sunCh=date>=SDO_START?{id:13,detail:"SDO AIA 304"}:{id:3,detail:"SOHO EIT 304"};const mk=(cls,alt)=>{const fig=document.createElement("figure");fig.className=cls;const img=document.createElement("img");img.alt=alt;const cap=document.createElement("figcaption");fig.append(img,cap);duo.append(fig);return{img,cap}};const sun=mk("portrait","Sol");sun.cap.innerHTML="<strong>Sol</strong><br>"+sunCh.detail;const earth=mk("portrait","Tierra");earth.cap.innerHTML="<strong>Tierra</strong><br>NASA EPIC / DSCOVR";sun.img.src="/api/sun?date="+encodeURIComponent(date)+"&sourceId="+sunCh.id;await sun.img.decode().catch(()=>{});sun.img.classList.add("ready");if(date<EPIC_START){earth.cap.innerHTML="<strong>Tierra</strong><br>Sin EPIC antes de "+EPIC_START;note.hidden=false;note.textContent="Antes de junio 2015 no hay retrato diario de la Tierra completa desde L1. El Sol sí, desde 1996.";return}const meta=await fetch("/api/earth?date="+encodeURIComponent(date)).then(r=>r.json());if(!meta.available){earth.cap.innerHTML="<strong>Tierra</strong><br>"+(meta.reason||"Sin frame");note.hidden=false;note.textContent=meta.reason||"Sin frame EPIC.";return}earth.cap.innerHTML="<strong>Tierra</strong><br>EPIC · "+(meta.observedAt||date);earth.img.src=meta.imageUrl;await earth.img.decode().catch(()=>{});earth.img.classList.add("ready");note.hidden=true}
+</script></body></html>
