@@ -1,0 +1,11 @@
+name = "space-inminente-preview"
+main = "src/worker.js"
+compatibility_date = "2026-11-08"
+workers_dev = true
+preview_urls = true
+
+[[kv_namespaces]]
+binding = "SPACE_HTML"
+id = "be1ffc101e804d3083c6b9e963155792"
+
+[previews]

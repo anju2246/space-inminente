@@ -1,0 +1,14 @@
+{
+  "name": "space-inminente",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Preview: Sol de tu día (identidad + Sol/Tierra) — Inminente",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler preview"
+  },
+  "devDependencies": {
+    "wrangler": "^4.158.0"
+  }
+}
